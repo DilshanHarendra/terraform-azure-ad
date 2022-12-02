@@ -1,9 +1,11 @@
 .env*
-.terraform
+.terraform/
 .terraform-plan*
 .one
 *.old
 .idea
-/terraform.tfstate
-/terraform.tfstate.backup
+*.log
+*.backup
+./*.tfstate
 /.terraform.lock.hcl
+/terraform.tfstate
