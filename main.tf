@@ -15,34 +15,26 @@ provider "azurerm" {
 }
 
 #create resource group
-resource "azurerm_resource_group" "rg" {
-  name     = "sysco_demo_rg"
-  location = "Southeast Asia"
-  tags = {
-    Environment = "Dev"
-    Version     = "29112022"
-  }
+module "resource_group" {
+  source = "./resource_group"
+  name   = "sysco_demo_rg"
+  env    = "Dev"
+
 }
 
+
 #create Active Directory tenant
-resource "azurerm_aadb2c_directory" "commerce_apps_tenant" {
-  country_code            = "SG"
-  data_residency_location = "Asia Pacific"
-  display_name            = "commerce-apps-tenant"
-  domain_name             = "commerceapps.onmicrosoft.com"
-  resource_group_name     = azurerm_resource_group.rg.name
-  sku_name                = "PremiumP1"
-  tags = {
-    Environment = "Dev"
-    Version     = "29112022"
-  }
+module "tenant" {
+  source              = "./tenant"
+  display_name        = "dperera-apps-tenant"
+  env                 = "Dev"
+  resource_group_name = module.resource_group.rg_name_output
 }
 
 #Register Application
-resource "azuread_application" "graph_worker" {
-  display_name     = "GraphWorker_App"
-  sign_in_audience = "AzureADMyOrg"
-  web {
-    redirect_uris = ["http://localhost/"]
-  }
+module "application" {
+  source       = "./application"
+  display_name = "vendor-app3"
+  tenant_id    = module.tenant.tenant_id
 }
+
