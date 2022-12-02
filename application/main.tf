@@ -34,8 +34,3 @@ resource "azuread_application" "vendor_app" {
     }
   }
 }
-data "azurerm_client_config" "config" {}
-
-output "current_tenet" {
-  value = "${data.azurerm_client_config.config}"
-}
