@@ -34,7 +34,7 @@ module "tenant" {
 #Register Application
 module "application" {
   source       = "./application"
-  display_name = "vendor-app3"
+  display_name = "fashion-store"
   tenant_id    = module.tenant.tenant_id
 }
 
