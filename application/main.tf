@@ -26,11 +26,16 @@ resource "azuread_application" "vendor_app" {
   web {
     homepage_url  = "http://localhost:3000"
     logout_url    = "http://localhost:3000/logout"
-    redirect_uris = ["https://jwt.ms/"]
+    redirect_uris = ["https://jwt.ms/","http://localhost:3000/"]
 
     implicit_grant {
       access_token_issuance_enabled = true
       id_token_issuance_enabled     = true
     }
   }
+
+  single_page_application {
+    redirect_uris = ["http://localhost:3000/","http://localhost:8080/"]
+  }
+
 }
