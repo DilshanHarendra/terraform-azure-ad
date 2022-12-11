@@ -1,4 +1,8 @@
 # Configure the Azure provider
+
+/*
+* more info : https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application
+*/
 terraform {
   required_providers {
     azurerm = {
@@ -45,6 +49,7 @@ resource "azuread_application" "internal_app" {
   required_resource_access {
     resource_app_id = var.api_application.application_id
 
+# add read & write permission
     resource_access {
       id   = local.permission_scopes[index(local.permission_scopes.*.value,"product.read")].id
       type = "Scope"

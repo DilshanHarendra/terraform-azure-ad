@@ -1,4 +1,8 @@
 # Configure the Azure provider
+
+/*
+* more info : https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#features
+*/
 terraform {
   required_providers {
     azurerm = {

@@ -1,4 +1,8 @@
 # Configure the Azure provider
+
+/*
+* more info : https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application
+*/
 terraform {
   required_providers {
     azurerm = {
@@ -35,6 +39,7 @@ resource "azuread_application" "api" {
   api {
     requested_access_token_version = 2
 
+# define scopes
     oauth2_permission_scope {
       id                         = local.id1
       admin_consent_description  = "Allow read access to ${local.scope_name} api"

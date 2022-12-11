@@ -1,4 +1,8 @@
 # Configure the Azure provider
+
+/*
+* more info : https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application
+*/
 terraform {
   required_providers {
     azurerm = {
@@ -43,6 +47,7 @@ resource "azuread_application" "public_app" {
     }
   }
 
+# add read only permission
   required_resource_access {
     resource_app_id = var.api_application.application_id
 
