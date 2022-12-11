@@ -8,3 +8,8 @@ variable "tenant_id" {
   type = string
   description = "This is tenant id"
 }
+
+variable "tenant_domain" {
+  type = string
+  description = "This is tenant domain"
+}
