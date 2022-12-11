@@ -23,6 +23,7 @@ module "resource_group" {
 }
 
 
+
 #create Active Directory tenant
 module "tenant" {
   source              = "./tenant"
@@ -31,10 +32,25 @@ module "tenant" {
   resource_group_name = module.resource_group.rg_name_output
 }
 
-#Register Application
-module "application" {
-  source       = "./application"
-  display_name = "fashion-store"
+#Register Applications
+module "api_application" {
+  source       = "./api_application"
+  display_name = "fashion-store-api"
   tenant_id    = module.tenant.tenant_id
+  tenant_domain = module.tenant.tenant_domain_name
 }
 
+
+module "public_client_application" {
+  source       = "./public_client_application"
+  display_name = "fashion-store-public"
+  tenant_id    = module.tenant.tenant_id
+  api_application = module.api_application.api_application
+}
+
+module "internal_client_application" {
+  source       = "./internal_client_application"
+  display_name = "fashion-store-internal"
+  tenant_id    = module.tenant.tenant_id
+  api_application = module.api_application.api_application
+}
